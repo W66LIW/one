@@ -1,5 +1,8 @@
 "use strict"
+
+
 const apple = ['a','pp', 'l', 'e']
+
 function arrToStr1 (arr) {
     const str = arr.join("");
     return str;
@@ -10,7 +13,6 @@ function arrToStr2 (arr) {
     for(let i = 0; i < arr.length; i++){
         str += arr[i];
     }
-
     return str;
 }
 
