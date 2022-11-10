@@ -11,6 +11,5 @@ return str
 .join('');
 }
 
-
 alert(changeRegister(a));
 console.log(typeof(changeRegister(a)));
