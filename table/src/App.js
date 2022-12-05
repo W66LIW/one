@@ -10,25 +10,38 @@ const personInput = {
 function App() {
   const [personData, setPersonData] = useState(personInput);
   const [persons, setPerson] = useState([]);
-  console.log(persons)
+
+  const isInputFilled = () => personData.name && personData.contract && personData.price;
+  
   const handleSubmitPerson = (e) => {
     e.preventDefault();
-    setPerson((prevState) => [...prevState, personData]);
-    setPersonData(personInput);
-
-
+    if (isInputFilled()){
+    setPerson((prevState) => [personData, ...prevState]);
+    setPersonData(personInput);}
   }
+
+  const handleKeyDown = (e) => {
+   // e.preventDefault();
+   if (e.keyCode === 13)  {
+    console.log("key down")
+  //    handleSubmitPerson()
+}
+  }
+
+  console.log(persons)
+
   return (
-    <div className="App-header">
-      <table>
-        <tr>
+    <div className="App-header" tabIndex={13} onKeyDown={handleKeyDown}>
+      <table onKeyDown={()=>handleKeyDown()}>
+        <tbody>
+          <tr>
           <th>
           <form>
             <input type="text" placeholder="..." onChange={(e) => setPersonData((prevState) => ({
               ...prevState,
               name: e.target.value
               }))}
-              value={personData.name}/>
+              value={personData.name}required/>
           </form>
         </th>
         <th>
@@ -37,7 +50,7 @@ function App() {
               ...prevState,
               contract: e.target.value
             }))}
-            value={personData.contract}/>
+            value={personData.contract}required/>
           </form>
         </th>
         <th>
@@ -46,22 +59,24 @@ function App() {
               ...prevState,
               price: +e.target.value
             }))}
-            value={personData.price}/>
+            value={personData.price} required/>
           </form>
         </th>
-        <th><form onSubmit={handleSubmitPerson}><button>save</button></form></th>
+       
+        <th><form onSubmit={handleSubmitPerson}><button type='submit'>save</button></form></th>
         </tr>
+        </tbody>
         {
-          persons.map(person => {
+          persons.map((person) => {
             return(
             <tr><td>{person.name}</td><td>{person.contract}</td><td>{person.price}</td></tr>
             )})
         }
-        <tr><td>-</td><td>-</td><td>-</td></tr>
-        
+       
       </table>
     </div>
   );
 }
+
 
 export default App;
