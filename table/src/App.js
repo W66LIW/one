@@ -7,32 +7,58 @@ const personInput = {
   price: "",
 }
 
+const edit = {
+  isEdit: false,
+  personIndex: null
+}
+
 function App() {
   const [personData, setPersonData] = useState(personInput);
   const [persons, setPerson] = useState([]);
+  const [editablePersonData, setEditablePersonData] = useState({
+    isEdit: false,
+    personIndex: null
+  });
 
   const isInputFilled = () => personData.name && personData.contract && personData.price;
   
   const handleSubmitPerson = (e) => {
     e.preventDefault();
     if (isInputFilled()){
-    setPerson((prevState) => [personData, ...prevState]);
+      if(editablePersonData.isEdit){
+        const editablePersons = persons;
+        editablePersons.slice((editablePersonData.personIndex), 1, personData);
+        setPerson(editablePersons);
+        setEditablePersonData(edit)
+      } else {
+        setPerson((prevState) => [personData, ...prevState])};
     setPersonData(personInput);}
   }
 
-  const handleKeyDown = (e) => {
-   // e.preventDefault();
-   if (e.keyCode === 13)  {
-    console.log("key down")
-  //    handleSubmitPerson()
-}
+  const handleClickPerson = (data, index) => {
+    setEditablePersonData({
+      isEdit: true,
+      personIndex: index
+    })
+    setPersonData(data);
+    
+    console.log(data, `index ${index}`);
+    console.log(editablePersonData);
+    console.log(persons);
+
   }
 
-  console.log(persons)
+//   const handleKeyDown = (e) => {
+//    // e.preventDefault();
+//    if (e.keyCode === 13)  {
+//     console.log("key down")
+//   //    handleSubmitPerson()
+// }
+//   } (in the tag tabIndex={13} onKeyDown={handleKeyDown})
 
   return (
-    <div className="App-header" tabIndex={13} onKeyDown={handleKeyDown}>
-      <table onKeyDown={()=>handleKeyDown()}>
+    <div className="App-header">
+      <table>
         <tbody>
           <tr>
           <th>
@@ -41,7 +67,7 @@ function App() {
               ...prevState,
               name: e.target.value
               }))}
-              value={personData.name}required/>
+              value={personData.name}/>
           </form>
         </th>
         <th>
@@ -50,7 +76,7 @@ function App() {
               ...prevState,
               contract: e.target.value
             }))}
-            value={personData.contract}required/>
+            value={personData.contract}/>
           </form>
         </th>
         <th>
@@ -59,20 +85,20 @@ function App() {
               ...prevState,
               price: +e.target.value
             }))}
-            value={personData.price} required/>
+            value={personData.price}/>
           </form>
         </th>
        
         <th><form onSubmit={handleSubmitPerson}><button type='submit'>save</button></form></th>
         </tr>
-        </tbody>
+        
         {
-          persons.map((person) => {
+          persons.map((person, index) => {
             return(
-            <tr><td>{person.name}</td><td>{person.contract}</td><td>{person.price}</td></tr>
+            <tr key={persons.indexOf(person)} onClick={()=>handleClickPerson(person, index)}><td>{person.name}</td><td>{person.contract}</td><td>{person.price}</td></tr>
             )})
         }
-       
+       </tbody>
       </table>
     </div>
   );
