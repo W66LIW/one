@@ -14,11 +14,13 @@ const edit = {
 
 function App() {
   const [personData, setPersonData] = useState(personInput);
-  const [persons, setPerson] = useState([]);
-  const [editablePersonData, setEditablePersonData] = useState({
-    isEdit: false,
-    personIndex: null
-  });
+  const [persons, setPersons] = useState([]);
+  const [editablePersonData, setEditablePersonData] = useState(edit
+  //   {
+  //   isEdit: false,
+  //   personIndex: null
+  // }
+  );
 
   const isInputFilled = () => personData.name && personData.contract && personData.price;
   
@@ -27,15 +29,18 @@ function App() {
     if (isInputFilled()){
       if(editablePersonData.isEdit){
         const editablePersons = persons;
-        editablePersons.slice((editablePersonData.personIndex), 1, personData);
-        setPerson(editablePersons);
+        editablePersons.splice((editablePersonData.personIndex), 1, personData);
+        setPersons(editablePersons);
         setEditablePersonData(edit)
       } else {
-        setPerson((prevState) => [personData, ...prevState])};
+        setPersons((prevState) => [personData, ...prevState])};
     setPersonData(personInput);}
   }
 
   const handleClickPerson = (data, index) => {
+    // editablePersonData.isEdit = true;
+    // editablePersonData.personIndex = index;
+    
     setEditablePersonData({
       isEdit: true,
       personIndex: index
