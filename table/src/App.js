@@ -9,18 +9,13 @@ const personInput = {
 
 const edit = {
   isEdit: false,
-  personIndex: null
+  personIndex: null,
 }
 
 function App() {
   const [personData, setPersonData] = useState(personInput);
   const [persons, setPersons] = useState([]);
-  const [editablePersonData, setEditablePersonData] = useState(edit
-  //   {
-  //   isEdit: false,
-  //   personIndex: null
-  // }
-  );
+  const [editablePersonData, setEditablePersonData] = useState(edit);
 
   const isInputFilled = () => personData.name && personData.contract && personData.price;
   
@@ -31,16 +26,23 @@ function App() {
         const editablePersons = persons;
         editablePersons.splice((editablePersonData.personIndex), 1, personData);
         setPersons(editablePersons);
-        setEditablePersonData(edit)
+        setEditablePersonData(edit);
       } else {
         setPersons((prevState) => [personData, ...prevState])};
     setPersonData(personInput);}
+    console.log("handleSabmit works")
   }
 
-  const handleClickPerson = (data, index) => {
-    // editablePersonData.isEdit = true;
-    // editablePersonData.personIndex = index;
-    
+  const handleRemoveClick = (e) => {
+    e.preventDefault();
+  setPersons(persons.filter((person, index) => index !== editablePersonData.personIndex));
+  setPersonData(personInput);
+
+
+  }
+
+  const handleClickPerson = (e, data, index) => {
+    e.preventDefault();   
     setEditablePersonData({
       isEdit: true,
       personIndex: index
@@ -48,21 +50,21 @@ function App() {
     setPersonData(data);
     
     console.log(data, `index ${index}`);
-    console.log(editablePersonData);
-    console.log(persons);
+    }
 
+  const handleKeyDown = (e) => {
+  // e.preventDefault(); e
+   if(e.key === "Enter"){
+    console.log(`key down "${e.key}"`);
+    handleSubmitPerson(e);
+   }  
   }
 
-//   const handleKeyDown = (e) => {
-//    // e.preventDefault();
-//    if (e.keyCode === 13)  {
-//     console.log("key down")
-//   //    handleSubmitPerson()
-// }
-//   } (in the tag tabIndex={13} onKeyDown={handleKeyDown})
+console.log(editablePersonData);
+console.log(persons);
 
   return (
-    <div className="App-header">
+    <div className="App-header" tabIndex={0} onKeyDown={handleKeyDown}>
       <table>
         <tbody>
           <tr>
@@ -95,12 +97,13 @@ function App() {
         </th>
        
         <th><form onSubmit={handleSubmitPerson}><button type='submit'>save</button></form></th>
+        <th><form onClick={handleRemoveClick}><button>remove</button></form></th>
         </tr>
         
         {
           persons.map((person, index) => {
             return(
-            <tr key={persons.indexOf(person)} onClick={()=>handleClickPerson(person, index)}><td>{person.name}</td><td>{person.contract}</td><td>{person.price}</td></tr>
+            <tr key={persons.indexOf(person)} onClick={(e)=>handleClickPerson(e, person, index)}><td>{person.name}</td><td>{person.contract}</td><td>{person.price}</td></tr>
             )})
         }
        </tbody>
