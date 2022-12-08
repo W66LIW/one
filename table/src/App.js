@@ -34,12 +34,10 @@ function App() {
   }
 
   const handleRemoveClick = (e) => {
-    e.preventDefault();
-  //  const confirmation = confirm("Do you");
-   // if(confirmation){
+    e.preventDefault();   
   setPersons(persons.filter((person, index) => index !== editablePersonData.personIndex));
   setPersonData(personInput);
-//}
+  
 
 
   }
@@ -55,6 +53,16 @@ function App() {
     console.log(data, `index ${index}`);
     }
 
+    // const handleAddNonthClick = (e) => {
+    //   e.preventDefault();
+    //   let td = document.createElement("td");
+    //   document.getElementById("person").appendChild(td);
+    //   td.innerHTML = "add";
+    //   console.log("added");
+
+
+    // }
+
   const handleKeyDown = (e) => {
    if(e.key === "Enter"){
     console.log(`key down "${e.key}"`);
@@ -64,11 +72,14 @@ function App() {
 
 console.log(editablePersonData);
 console.log(persons);
-
+//<button id='Add month' onClick={handleAddNonthClick}>Add month</button>
   return (
+    
     <div className="App-header" tabIndex={0} onKeyDown={handleKeyDown}>
+      
       <table>
         <tbody>
+        <tr><td>Арендодатель</td><td>Договор</td><td>Арендная плата</td><td>НДФЛ</td></tr>
           <tr>
           <th>
           <form>
@@ -97,15 +108,20 @@ console.log(persons);
             value={personData.price}/>
           </form>
         </th>
-       
-        <th><form onSubmit={handleSubmitPerson}><button className='spin' type='submit'>save</button></form></th>
+        <th>
+          <form>
+            <input/>
+          </form>
+        </th>
+        <th></th>       
+        <th><form onSubmit={handleSubmitPerson}><button type='submit'>save</button></form></th>
         <th><form onClick={handleRemoveClick}><button>remove</button></form></th>
         </tr>
         
         {
           persons.map((person, index) => {
             return(
-            <tr key={persons.indexOf(person)} onClick={(e)=>handleClickPerson(e, person, index)}><td>{person.name}</td><td>{person.contract}</td><td>{person.price}</td><td>{person.price*13/100}</td></tr>
+            <tr id="person" key={persons.indexOf(person)} onDoubleClick={(e)=>handleClickPerson(e, person, index)}><td>{person.name}</td><td>{person.contract}</td><td>{person.price}</td><td>{(person.price*13/87).toFixed(0)}</td></tr>
             )})
         }
        </tbody>
