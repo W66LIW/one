@@ -35,8 +35,11 @@ function App() {
 
   const handleRemoveClick = (e) => {
     e.preventDefault();
+  //  const confirmation = confirm("Do you");
+   // if(confirmation){
   setPersons(persons.filter((person, index) => index !== editablePersonData.personIndex));
   setPersonData(personInput);
+//}
 
 
   }
@@ -53,7 +56,6 @@ function App() {
     }
 
   const handleKeyDown = (e) => {
-  // e.preventDefault(); e
    if(e.key === "Enter"){
     console.log(`key down "${e.key}"`);
     handleSubmitPerson(e);
@@ -96,14 +98,14 @@ console.log(persons);
           </form>
         </th>
        
-        <th><form onSubmit={handleSubmitPerson}><button type='submit'>save</button></form></th>
+        <th><form onSubmit={handleSubmitPerson}><button className='spin' type='submit'>save</button></form></th>
         <th><form onClick={handleRemoveClick}><button>remove</button></form></th>
         </tr>
         
         {
           persons.map((person, index) => {
             return(
-            <tr key={persons.indexOf(person)} onClick={(e)=>handleClickPerson(e, person, index)}><td>{person.name}</td><td>{person.contract}</td><td>{person.price}</td></tr>
+            <tr key={persons.indexOf(person)} onClick={(e)=>handleClickPerson(e, person, index)}><td>{person.name}</td><td>{person.contract}</td><td>{person.price}</td><td>{person.price*13/100}</td></tr>
             )})
         }
        </tbody>
