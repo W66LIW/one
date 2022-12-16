@@ -79,7 +79,7 @@ console.log(persons);
       
       <table>
         <tbody>
-        <tr><td>Арендодатель</td><td>Договор</td><td>Арендная плата</td><td>НДФЛ</td></tr>
+        <tr><td>Арендодатель</td><td>Договор</td><td>Арендная плата</td></tr>
           <tr>
           <th>
           <form>
@@ -107,13 +107,7 @@ console.log(persons);
             }))}
             value={personData.price}/>
           </form>
-        </th>
-        <th>
-          <form>
-            <input/>
-          </form>
-        </th>
-        <th></th>       
+        </th>       
         <th><form onSubmit={handleSubmitPerson}><button type='submit'>save</button></form></th>
         <th><form onClick={handleRemoveClick}><button>remove</button></form></th>
         </tr>
