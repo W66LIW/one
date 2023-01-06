@@ -1,41 +1,36 @@
-.Table {
+.App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 30vh;
   font-size: calc(10px + 2vmin);
   color: white;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+}
+
+
+.Table {
+  background-color: #282c34;
+  min-height: 80vh;
+  font-size: calc(10px + 1vmin);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 
 .Add-month {
   background-color: #282c34;
-  min-height: 100vh;
-  flex-direction: column;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(1px + 2vmin);
   color: white;
-  display: flex;
-  justify-content: right;
-  align-items: right;
   position: absolute;
   top: 26px;
-  right: 30px;
-  
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  font-size: calc(10px + 2vmin);
-  color: white;
-  min-height: 100vh;
+  right: 30px;  
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: baseline;
 }
 
 

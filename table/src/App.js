@@ -5,6 +5,8 @@ const personInput = {
   name: "",
   contract: "",
   price: "",
+  pays: [],
+  isActive: "✓",
 }
 
 const edit = {
@@ -16,8 +18,13 @@ function App() {
   const [personData, setPersonData] = useState(personInput);
   const [persons, setPersons] = useState([]);
   const [editablePersonData, setEditablePersonData] = useState(edit);
+  const [month, setMonth] = useState("");
+  const [payMonths, setPayMonths] = useState([]);
 
   const isInputFilled = () => personData.name && personData.contract && personData.price;
+  const isMonthInputFilled = () => month;
+
+
 
   const handleSubmitPerson = (e) => {
     e.preventDefault();
@@ -32,7 +39,6 @@ function App() {
       };
       setPersonData(personInput);
     }
-    console.log("handleSabmit works")
   }
 
   const handleRemoveClick = (e) => {
@@ -49,22 +55,38 @@ function App() {
     })
     setPersonData(data);
 
-    console.log(data, `index ${index}`);
+    console.log(`Edit`, data, `index ${index}`);
   }
+
+
+  const handleClickisActive = (e, person, index) => {
+    e.preventDefault();
+    if(person.isActive === "✓"){
+    person.isActive = "X";} else {person.isActive = "✓"}
+    const editablePersons = persons;
+        editablePersons.splice((editablePersonData.personIndex), 1, person);
+        setPersons(editablePersons);
+    console.log("Active",person);
+  }
+
 
   const handleAddMonthClick = (e) => {
     // e.preventDefault();
-    setPersons(persons.map((person) => {
-      person.added = "added";
-      return (person);
-    }))
+    if (isMonthInputFilled()) {
+      setPayMonths((prevState) => [month, ...prevState]);
+      setMonth("");
 
-
+      setPersons(
+        persons.map(person => {
+          person.pays = [person.price, ...person.pays]
+          return (person);
+        })
+      )
+    }
   }
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      console.log(`key down "${e.key}"`);
       handleSubmitPerson(e);
     }
   }
@@ -76,7 +98,14 @@ function App() {
     <div>
       <div tabIndex={0} onKeyDown={handleKeyDown}>
 
-        <div className="Add-month"><button onClick={handleAddMonthClick}>add month</button></div>
+        <div className="Add-month">
+          <form>
+            <input type="text" placeholder="..." onChange={(e) => setMonth(e.target.value)}
+              value={month} />
+          </form>
+          <button onClick={handleAddMonthClick}>add month</button>
+        </div>
+
 
         <div className="App-header">
           <table>
@@ -113,33 +142,34 @@ function App() {
                 <th><form onSubmit={handleSubmitPerson}><button type='submit'>save</button></form></th>
                 <th><form onClick={handleRemoveClick}><button>remove</button></form></th>
               </tr>
-
-    
-
             </tbody>
           </table>
         </div>
       </div>
 
 
-
-
-
       <div className="Table">
         <table>
+          <thead><tr><th></th><th>ФИО</th><th>ДОГОВОР</th><th>АРЕНДНАЯ ПЛАТА</th>
+            {payMonths.map((mnth) => {
+              return (<th key={mnth}>{mnth}</th>)
+            })}
+          </tr></thead>
           <tbody>
 
             {
               persons.map((person, index) => {
                 return (
-                  <tr id="person" key={persons.indexOf(person)} onDoubleClick={(e) => handleClickPerson(e, person, index)}>
-                    {Object.values(person).map((term) => {
-                      return (
-                        <td>{term}</td>
-                      )
-                    })
+                  <tr key={index}>
+                    <th onDoubleClick={(e) => handleClickisActive(e, person, index)} key={"isActive"}>{person.isActive}</th>
+                    <th key={"name"} onDoubleClick={(e) => handleClickPerson(e, person, index)}>{person.name}</th>
+                    <th key={"contract"} onDoubleClick={(e) => handleClickPerson(e, person, index)}>{person.contract}</th>
+                    <th key={"price"} onDoubleClick={(e) => handleClickPerson(e, person, index)}>{person.price}</th>
+                    {person.pays.map((pay, index) => {
+                      return (<th key={index}>{pay}</th>)
                     }
-
+                    )
+                    }
                   </tr>)
               })
             }
