@@ -67,7 +67,7 @@ function App() {
     const editablePersons = persons;
     editablePersons.splice((editablePersonData.personIndex), 1, person);
     setPersons(editablePersons);
-    console.log("Active", person);
+    //console.log("Active", person);
   }
 
 
