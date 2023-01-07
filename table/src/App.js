@@ -61,12 +61,13 @@ function App() {
 
   const handleClickisActive = (e, person, index) => {
     e.preventDefault();
-    if(person.isActive === "✓"){
-    person.isActive = "X";} else {person.isActive = "✓"}
+    if (person.isActive === "✓") {
+      person.isActive = "✕";
+    } else { person.isActive = "✓" }
     const editablePersons = persons;
-        editablePersons.splice((editablePersonData.personIndex), 1, person);
-        setPersons(editablePersons);
-    console.log("Active",person);
+    editablePersons.splice((editablePersonData.personIndex), 1, person);
+    setPersons(editablePersons);
+    console.log("Active", person);
   }
 
 
@@ -158,20 +159,22 @@ function App() {
           <tbody>
 
             {
-              persons.map((person, index) => {
-                return (
-                  <tr key={index}>
-                    <th onDoubleClick={(e) => handleClickisActive(e, person, index)} key={"isActive"}>{person.isActive}</th>
-                    <th key={"name"} onDoubleClick={(e) => handleClickPerson(e, person, index)}>{person.name}</th>
-                    <th key={"contract"} onDoubleClick={(e) => handleClickPerson(e, person, index)}>{person.contract}</th>
-                    <th key={"price"} onDoubleClick={(e) => handleClickPerson(e, person, index)}>{person.price}</th>
-                    {person.pays.map((pay, index) => {
-                      return (<th key={index}>{pay}</th>)
-                    }
-                    )
-                    }
-                  </tr>)
-              })
+              ([...persons]
+                .sort((a, b) => a.name > b.name ? 1 : -1,))
+                .map((person, index) => {
+                  return (
+                    <tr key={index}>
+                      <th onDoubleClick={(e) => handleClickisActive(e, person, index)} key={"isActive"}>{person.isActive}</th>
+                      <th key={"name"} onDoubleClick={(e) => handleClickPerson(e, person, index)}>{person.name}</th>
+                      <th key={"contract"} onDoubleClick={(e) => handleClickPerson(e, person, index)}>{person.contract}</th>
+                      <th key={"price"} onDoubleClick={(e) => handleClickPerson(e, person, index)}>{person.price}</th>
+                      {person.pays.map((pay, index) => {
+                        return (<th key={index}>{pay}</th>)
+                      }
+                      )
+                      }
+                    </tr>)
+                })
             }
 
           </tbody>
