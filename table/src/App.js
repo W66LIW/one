@@ -12,6 +12,7 @@ const personInput = {
 const edit = {
   isEdit: false,
   personIndex: null,
+  person: {},
 }
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
     if (isInputFilled()) {
       if (editablePersonData.isEdit) {
         const editablePersons = persons;
-        editablePersons.splice((editablePersonData.personIndex), 1, personData);
+        editablePersons.splice((editablePersons.indexOf(editablePersonData.person)), 1, personData);
         setPersons(editablePersons);
         setEditablePersonData(edit);
       } else {
@@ -42,16 +43,17 @@ function App() {
   }
 
   const handleRemoveClick = (e) => {
-    e.preventDefault();
-    setPersons(persons.filter((person, index) => index !== editablePersonData.personIndex));
+   // e.preventDefault();
+    setPersons(persons.filter((person, index) => index !== persons.indexOf(editablePersonData.person)));
     setPersonData(personInput);
   }
 
   const handleClickPerson = (e, data, index) => {
-    e.preventDefault();
+   // e.preventDefault();
     setEditablePersonData({
       isEdit: true,
-      personIndex: index
+      personIndex: index,
+      person: data
     })
     setPersonData(data);
 
@@ -59,13 +61,13 @@ function App() {
   }
 
 
-  const handleClickisActive = (e, person, index) => {
-    e.preventDefault();
+  const handleClickisActive = (e, person) => {
+  //  e.preventDefault();
     if (person.isActive === "✓") {
       person.isActive = "✕";
     } else { person.isActive = "✓" }
     const editablePersons = persons;
-    editablePersons.splice((editablePersonData.personIndex), 1, person);
+    editablePersons.splice((editablePersons.indexOf(person)), 1, person);
     setPersons(editablePersons);
     //console.log("Active", person);
   }
@@ -79,9 +81,14 @@ function App() {
 
       setPersons(
         persons.map(person => {
-          person.pays = [person.price, ...person.pays]
-          return (person);
-        })
+              if(person.isActive === "✓") {
+              person.pays = [person.price, ...person.pays]}
+              else {
+                person.pays = ["", ...person.pays]
+              }
+              return (person);
+            
+          })
       )
     }
   }
@@ -160,6 +167,7 @@ function App() {
 
             {
               ([...persons]
+                .filter((person) => person.isActive === "✓")
                 .sort((a, b) => a.name > b.name ? 1 : -1,))
                 .map((person, index) => {
                   return (
@@ -168,14 +176,27 @@ function App() {
                       <th key={"name"} onDoubleClick={(e) => handleClickPerson(e, person, index)}>{person.name}</th>
                       <th key={"contract"} onDoubleClick={(e) => handleClickPerson(e, person, index)}>{person.contract}</th>
                       <th key={"price"} onDoubleClick={(e) => handleClickPerson(e, person, index)}>{person.price}</th>
+
                       {person.pays.map((pay, index) => {
-                        return (<th key={index}>{pay}</th>)
-                      }
-                      )
-                      }
+                        return (<th key={index}>{pay}</th>)})}
                     </tr>)
-                })
+                })             
             }
+            {  ([...persons]
+                   .filter((person) => person.isActive === "✕")
+                   .sort((a, b) => a.name > b.name ? 1 : -1,))
+                   .map((person, index) => {
+                     return (
+                       <tr key={index}>
+                         <th onDoubleClick={(e) => handleClickisActive(e, person, index)} key={"isActive"}>{person.isActive}</th>
+                         <th key={"name"} onDoubleClick={(e) => handleClickPerson(e, person, index)}>{person.name}</th>
+                         <th key={"contract"} onDoubleClick={(e) => handleClickPerson(e, person, index)}>{person.contract}</th>
+                         <th key={"price"} onDoubleClick={(e) => handleClickPerson(e, person, index)}>{person.price}</th>
+                         {person.pays.map((pay, index) => {
+                           return (<th key={index}>{pay}</th>)})}
+                       </tr>)
+                   })
+              }
 
           </tbody>
         </table>
