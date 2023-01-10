@@ -11,11 +11,15 @@ const personInput = {
 
 const edit = {
   isEdit: false,
-  personIndex: null,
+  //personIndex: null,
   person: {},
 }
 
+
+
+
 function App() {
+
   const [personData, setPersonData] = useState(personInput);
   const [persons, setPersons] = useState([]);
   const [editablePersonData, setEditablePersonData] = useState(edit);
@@ -31,7 +35,7 @@ function App() {
     e.preventDefault();
     if (isInputFilled()) {
       if (editablePersonData.isEdit) {
-        const editablePersons = persons;
+        const editablePersons = Object.assign([], persons);
         editablePersons.splice((editablePersons.indexOf(editablePersonData.person)), 1, personData);
         setPersons(editablePersons);
         setEditablePersonData(edit);
@@ -43,33 +47,38 @@ function App() {
   }
 
   const handleRemoveClick = (e) => {
-   // e.preventDefault();
-    setPersons(persons.filter((person, index) => index !== persons.indexOf(editablePersonData.person)));
+    e.preventDefault();
+    setPersons(Object.assign([], persons).filter((person, index) => index !== persons.indexOf(editablePersonData.person)));
     setPersonData(personInput);
+
+
   }
 
-  const handleClickPerson = (e, data, index) => {
-   // e.preventDefault();
+  const handleClickPerson = (e, data) => {
+    // e.preventDefault();
     setEditablePersonData({
       isEdit: true,
-      personIndex: index,
+      //personIndex: index,
       person: data
     })
     setPersonData(data);
 
-    console.log(`Edit`, data, `index ${index}`);
+    console.log(`Edit`, data);
   }
 
 
-  const handleClickisActive = (e, person) => {
-  //  e.preventDefault();
-    if (person.isActive === "✓") {
-      person.isActive = "✕";
-    } else { person.isActive = "✓" }
-    const editablePersons = persons;
-    editablePersons.splice((editablePersons.indexOf(person)), 1, person);
-    setPersons(editablePersons);
-    //console.log("Active", person);
+  const handleClickisActive = (e, personn) => {
+    e.preventDefault();
+    if (!isInputFilled()) {
+      let person = Object.assign({}, personn);
+      if (person.isActive === "✓") {
+        person.isActive = "✕";
+      } else { person.isActive = "✓"; }
+      const editablePersons = Object.assign([], persons);
+      editablePersons.splice((Object.assign([], persons).indexOf(personn)), 1, person);
+      //console.log("old persons", persons, editablePersons)
+      setPersons(editablePersons);
+    }
   }
 
 
@@ -80,15 +89,15 @@ function App() {
       setMonth("");
 
       setPersons(
-        persons.map(person => {
-              if(person.isActive === "✓") {
-              person.pays = [person.price, ...person.pays]}
-              else {
-                person.pays = ["", ...person.pays]
-              }
-              return (person);
-            
-          })
+        Object.assign([], persons).map(person => {
+          if (person.isActive === "✓") {
+            person.pays = [person.price, ...person.pays]
+          }
+          else {
+            person.pays = ["", ...person.pays]
+          }
+          return (person);
+        })
       )
     }
   }
@@ -101,6 +110,7 @@ function App() {
 
 
   console.log("persons", persons);
+
 
   return (
     <div>
@@ -166,37 +176,39 @@ function App() {
           <tbody>
 
             {
-              ([...persons]
+              (Object.assign([], persons)
                 .filter((person) => person.isActive === "✓")
                 .sort((a, b) => a.name > b.name ? 1 : -1,))
                 .map((person, index) => {
                   return (
                     <tr key={index}>
-                      <th onDoubleClick={(e) => handleClickisActive(e, person, index)} key={"isActive"}>{person.isActive}</th>
-                      <th key={"name"} onDoubleClick={(e) => handleClickPerson(e, person, index)}>{person.name}</th>
-                      <th key={"contract"} onDoubleClick={(e) => handleClickPerson(e, person, index)}>{person.contract}</th>
-                      <th key={"price"} onDoubleClick={(e) => handleClickPerson(e, person, index)}>{person.price}</th>
+                      <th onDoubleClick={(e) => handleClickisActive(e, person)} key={"isActive"}>{person.isActive}</th>
+                      <th key={1} onDoubleClick={(e) => handleClickPerson(e, person)}>{person.name}</th>
+                      <th key={2} onDoubleClick={(e) => handleClickPerson(e, person)}>{person.contract}</th>
+                      <th key={3} onDoubleClick={(e) => handleClickPerson(e, person)}>{person.price}</th>
 
                       {person.pays.map((pay, index) => {
-                        return (<th key={index}>{pay}</th>)})}
+                        return (<th key={index}>{pay}</th>)
+                      })}
                     </tr>)
-                })             
+                })
             }
-            {  ([...persons]
-                   .filter((person) => person.isActive === "✕")
-                   .sort((a, b) => a.name > b.name ? 1 : -1,))
-                   .map((person, index) => {
-                     return (
-                       <tr key={index}>
-                         <th onDoubleClick={(e) => handleClickisActive(e, person, index)} key={"isActive"}>{person.isActive}</th>
-                         <th key={"name"} onDoubleClick={(e) => handleClickPerson(e, person, index)}>{person.name}</th>
-                         <th key={"contract"} onDoubleClick={(e) => handleClickPerson(e, person, index)}>{person.contract}</th>
-                         <th key={"price"} onDoubleClick={(e) => handleClickPerson(e, person, index)}>{person.price}</th>
-                         {person.pays.map((pay, index) => {
-                           return (<th key={index}>{pay}</th>)})}
-                       </tr>)
-                   })
-              }
+            {(Object.assign([], persons)
+              .filter((person) => person.isActive === "✕")
+              .sort((a, b) => a.name > b.name ? 1 : -1,))
+              .map((person, index) => {
+                return (
+                  <tr key={index}>
+                    <th onDoubleClick={(e) => handleClickisActive(e, person)} key={"isActive"}>{person.isActive}</th>
+                    <th key={1} onDoubleClick={(e) => handleClickPerson(e, person)}>{person.name}</th>
+                    <th key={2} onDoubleClick={(e) => handleClickPerson(e, person)}>{person.contract}</th>
+                    <th key={3} onDoubleClick={(e) => handleClickPerson(e, person)}>{person.price}</th>
+                    {person.pays.map((pay, index) => {
+                      return (<th key={index}>{pay}</th>)
+                    })}
+                  </tr>)
+              })
+            }
 
           </tbody>
         </table>
