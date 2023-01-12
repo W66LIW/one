@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 
+
 const personInput = {
   name: "",
   contract: "",
@@ -76,7 +77,6 @@ function App() {
       } else { person.isActive = "✓"; }
       const editablePersons = Object.assign([], persons);
       editablePersons.splice((Object.assign([], persons).indexOf(personn)), 1, person);
-      //console.log("old persons", persons, editablePersons)
       setPersons(editablePersons);
     }
   }
@@ -100,6 +100,27 @@ function App() {
         })
       )
     }
+  }
+
+  const handleClickPay = (e, pay, person, index) => {
+    console.log('This is pay', pay, person.name);
+    let pperson = Object.assign({}, person);
+    pperson.pays[index]=<form>
+         <input type="text"
+        // onChange={(e) => setPersonData((prevState) => ({
+        //   ...prevState,
+        //   name: e.target.value
+        //}))}
+          value={pay} />
+      </form>
+
+    //   if (obj.isEdit) {
+    //
+    //   } else {
+    
+      const editablePersons = Object.assign([], persons);
+      editablePersons.splice((Object.assign([], persons).indexOf(person)), 1, pperson);
+      setPersons(editablePersons);
   }
 
   const handleKeyDown = (e) => {
@@ -178,7 +199,7 @@ function App() {
             {
               (Object.assign([], persons)
                 .filter((person) => person.isActive === "✓")
-                .sort((a, b) => a.name > b.name ? 1 : -1,))
+                .sort((a, b) => (a.name > b.name ? 1 : -1)))
                 .map((person, index) => {
                   return (
                     <tr key={index}>
@@ -188,7 +209,9 @@ function App() {
                       <th key={3} onDoubleClick={(e) => handleClickPerson(e, person)}>{person.price}</th>
 
                       {person.pays.map((pay, index) => {
-                        return (<th key={index}>{pay}</th>)
+                        return (
+                          <th key={index} onDoubleClick={((e) => handleClickPay(e, pay, person, index))}>{pay}</th>
+                        )
                       })}
                     </tr>)
                 })
@@ -204,7 +227,7 @@ function App() {
                     <th key={2} onDoubleClick={(e) => handleClickPerson(e, person)}>{person.contract}</th>
                     <th key={3} onDoubleClick={(e) => handleClickPerson(e, person)}>{person.price}</th>
                     {person.pays.map((pay, index) => {
-                      return (<th key={index}>{pay}</th>)
+                      return (<th key={index} onDoubleClick={((e) => handleClickPay(e, pay))}>{pay}</th>)
                     })}
                   </tr>)
               })
