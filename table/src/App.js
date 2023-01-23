@@ -106,7 +106,7 @@ function App() {
     console.log('This is pay', pay, person.name);
     let pperson = Object.assign({}, person);
     pperson.pays[index]=<form>
-         <input type="text"
+         <input className='Pay-input' type="text"
         // onChange={(e) => setPersonData((prevState) => ({
         //   ...prevState,
         //   name: e.target.value
