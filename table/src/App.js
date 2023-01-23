@@ -131,6 +131,7 @@ function App() {
 
 
   console.log("persons", persons);
+  console.log("persons", persons);
 
 
   return (
