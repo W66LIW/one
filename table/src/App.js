@@ -150,8 +150,8 @@ function App() {
   }
 
 
-  console.log("persons", persons);
-  console.log("editablePay", editablePay);
+   console.log("persons", persons);
+   //console.log("editablePay", editablePay);
 
 
 
