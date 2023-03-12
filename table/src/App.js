@@ -12,10 +12,15 @@ const personInput = {
 
 const edit = {
   isEdit: false,
-  //personIndex: null,
   person: {},
 }
 
+const payEdit = {
+  isEdit: false,
+  person: {},
+  index: "",
+  pay: "empty",
+}
 
 
 
@@ -26,9 +31,11 @@ function App() {
   const [editablePersonData, setEditablePersonData] = useState(edit);
   const [month, setMonth] = useState("");
   const [payMonths, setPayMonths] = useState([]);
+  const [editablePay, setPay] = useState(payEdit)
 
   const isInputFilled = () => personData.name && personData.contract && personData.price;
   const isMonthInputFilled = () => month;
+
 
 
 
@@ -56,11 +63,9 @@ function App() {
   }
 
   const handleClickPerson = (e, data) => {
-    // e.preventDefault();
     setEditablePersonData({
       isEdit: true,
-      //personIndex: index,
-      person: data
+      person: data,
     })
     setPersonData(data);
 
@@ -103,35 +108,51 @@ function App() {
   }
 
   const handleClickPay = (e, pay, person, index) => {
-    console.log('This is pay', pay, person.name);
-    let pperson = Object.assign({}, person);
-    pperson.pays[index]=<form>
-         <input className='Pay-input' type="text"
-        // onChange={(e) => setPersonData((prevState) => ({
-        //   ...prevState,
-        //   name: e.target.value
-        //}))}
-          value={pay} />
-      </form>
+   const p = new Promise((resolve, reject) => {
+    setPay({
+      isEdit: true,
+      person: person,
+      index: index,
+      pay: pay,
+    });
+    resolve();
+   }) 
 
-    //   if (obj.isEdit) {
-    //
-    //   } else {
+   p.then(() => {
+    let pperson = Object.assign({}, person);
+    pperson.pays[index] = <form>
+      <input className='Pay-input' type="text"
+        onChange={(e) => setPay(e.target.value)}
+        value={editablePay.pay} />
+    </form>
+
+    const editablePersons = Object.assign([], persons);
+    editablePersons.splice((Object.assign([], persons).indexOf(person)), 1, pperson);
+    setPersons(editablePersons);
+
     
-      const editablePersons = Object.assign([], persons);
-      editablePersons.splice((Object.assign([], persons).indexOf(person)), 1, pperson);
-      setPersons(editablePersons);
+   })
+
+  }
+
+  
+
+  const handleSubmitPay = () => {
+
+
   }
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleSubmitPerson(e);
+      handleSubmitPay(e);
     }
   }
 
 
   console.log("persons", persons);
-  console.log("persons", persons);
+  console.log("editablePay", editablePay);
+
 
 
   return (
