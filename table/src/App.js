@@ -160,48 +160,53 @@ function App() {
       <div tabIndex={0} onKeyDown={handleKeyDown}>
 
         <div className="Add-month">
-          <form>
-            <input type="text" placeholder="..." onChange={(e) => setMonth(e.target.value)}
+          <form> 
+            <input className='input' type="text" placeholder=" ..." onChange={(e) => setMonth(e.target.value)}
               value={month} />
           </form>
-          <button onClick={handleAddMonthClick}>add month</button>
+          <button className='btn' onClick={handleAddMonthClick}>add month</button>
         </div>
 
 
         <div className="App-header">
-          <table>
-            <tbody>
-              <tr><td>Арендодатель</td><td>Договор</td><td>Арендная плата</td></tr>
+          <table className="table-header">
+            <thead>
+            <tr><th>Арендодатель</th><th>Договор</th><th>Арендная плата</th><th></th><th></th></tr>
+            </thead>
+            <tbody className="tableInputs">              
               <tr>
-                <th>
+                <td><div>
                   <form>
-                    <input type="text" placeholder="..." onChange={(e) => setPersonData((prevState) => ({
+                    <input className='input' type="text" placeholder=" ..." onChange={(e) => setPersonData((prevState) => ({
                       ...prevState,
                       name: e.target.value
                     }))}
                       value={personData.name} />
                   </form>
-                </th>
-                <th>
+                  </div>
+                </td>
+                <td><div>
                   <form>
-                    <input type="text" placeholder='...' onChange={(e) => setPersonData((prevState) => ({
+                    <input className='input' type="text" placeholder=' ...' onChange={(e) => setPersonData((prevState) => ({
                       ...prevState,
                       contract: e.target.value
                     }))}
                       value={personData.contract} />
-                  </form>
-                </th>
-                <th>
+                  </form></div>
+                </td>
+                <td>
+                  <div>
                   <form>
-                    <input placeholder='...' onChange={(e) => setPersonData((prevState) => ({
+                    <input className='input' placeholder=' ...' onChange={(e) => setPersonData((prevState) => ({
                       ...prevState,
                       price: +e.target.value
                     }))}
                       value={personData.price} />
                   </form>
-                </th>
-                <th><form onSubmit={handleSubmitPerson}><button type='submit'>save</button></form></th>
-                <th><form onClick={handleRemoveClick}><button>remove</button></form></th>
+                  </div>
+                  </td>
+                <td><div><form onSubmit={handleSubmitPerson}><button className='btn' type='submit'>save</button></form></div></td>
+                <td><div><form onClick={handleRemoveClick}><button className='btn'>remove</button></form></div></td>
               </tr>
             </tbody>
           </table>
@@ -209,8 +214,8 @@ function App() {
       </div>
 
 
-      <div className="Table">
-        <table>
+      <div>
+        <table className="Table">
           <thead><tr><th></th><th>ФИО</th><th>ДОГОВОР</th><th>АРЕНДНАЯ ПЛАТА</th>
             {payMonths.map((mnth) => {
               return (<th key={mnth}>{mnth}</th>)
@@ -225,14 +230,14 @@ function App() {
                 .map((person, index) => {
                   return (
                     <tr key={index}>
-                      <th onDoubleClick={(e) => handleClickisActive(e, person)} key={"isActive"}>{person.isActive}</th>
-                      <th key={1} onDoubleClick={(e) => handleClickPerson(e, person)}>{person.name}</th>
-                      <th key={2} onDoubleClick={(e) => handleClickPerson(e, person)}>{person.contract}</th>
-                      <th key={3} onDoubleClick={(e) => handleClickPerson(e, person)}>{person.price}</th>
+                      <td onDoubleClick={(e) => handleClickisActive(e, person)} key={"isActive"}>{person.isActive}</td>
+                      <td key={1} onDoubleClick={(e) => handleClickPerson(e, person)}>{person.name}</td>
+                      <td key={2} onDoubleClick={(e) => handleClickPerson(e, person)}>{person.contract}</td>
+                      <td key={3} onDoubleClick={(e) => handleClickPerson(e, person)}>{person.price}</td>
 
                       {person.pays.map((pay, index) => {
                         return (
-                          <th key={index} onDoubleClick={((e) => handleClickPay(e, pay, person, index))}>{pay}</th>
+                          <td key={index} onDoubleClick={((e) => handleClickPay(e, pay, person, index))}>{pay}</td>
                         )
                       })}
                     </tr>)
@@ -244,12 +249,12 @@ function App() {
               .map((person, index) => {
                 return (
                   <tr key={index}>
-                    <th onDoubleClick={(e) => handleClickisActive(e, person)} key={"isActive"}>{person.isActive}</th>
-                    <th key={1} onDoubleClick={(e) => handleClickPerson(e, person)}>{person.name}</th>
-                    <th key={2} onDoubleClick={(e) => handleClickPerson(e, person)}>{person.contract}</th>
-                    <th key={3} onDoubleClick={(e) => handleClickPerson(e, person)}>{person.price}</th>
+                    <td onDoubleClick={(e) => handleClickisActive(e, person)} key={"isActive"}>{person.isActive}</td>
+                    <td key={1} onDoubleClick={(e) => handleClickPerson(e, person)}>{person.name}</td>
+                    <td key={2} onDoubleClick={(e) => handleClickPerson(e, person)}>{person.contract}</td>
+                    <td key={3} onDoubleClick={(e) => handleClickPerson(e, person)}>{person.price}</td>
                     {person.pays.map((pay, index) => {
-                      return (<th key={index} onDoubleClick={((e) => handleClickPay(e, pay))}>{pay}</th>)
+                      return (<td key={index} onDoubleClick={((e) => handleClickPay(e, pay))}>{pay}</td>)
                     })}
                   </tr>)
               })
