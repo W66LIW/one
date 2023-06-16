@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import './App.css';
+import Addmonth from './components/Addmonth';
+import { useDispatch, useSelector } from 'react-redux';
+//import { setCount } from './reducers/reposReducer';
+import { SET_COUNT } from './reducers/reposReducer';
 
 
 const personInput = {
@@ -25,6 +29,14 @@ const payEdit = {
 
 
 function App() {
+  const dispatch = useDispatch();
+  const count = useSelector(state => state.repos.count)
+
+  function onCountClick () {
+    dispatch(SET_COUNT())
+  }
+
+  
 
   const [personData, setPersonData] = useState(personInput);
   const [persons, setPersons] = useState([]);
@@ -157,8 +169,10 @@ function App() {
 
   return (
     <div>
+      <button onClick={() => onCountClick()}>COUNT</button>
+      <div>{count}</div>
       <div tabIndex={0} onKeyDown={handleKeyDown}>
-
+        <Addmonth value = {1}/>
         <div className="Add-month">
           <form> 
             <input className='input' type="text" placeholder=" ..." onChange={(e) => setMonth(e.target.value)}

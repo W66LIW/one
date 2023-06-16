@@ -87,9 +87,7 @@
   background-color: rgb(225, 224, 224);  
   height: 100%;
   width: 100%;
-  min-width: 3
-  
-  0px;
+  min-width: 30px;
   padding: 2px;
   border: none; 
   box-sizing: border-box;
