@@ -9,7 +9,6 @@ const Addmonth = () => {
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
   const months = useSelector(state => state.month.months);
-  //console.log('months:' + JSON.stringify(months) )
 
   function onMonthClick () {
     if(!input) return;
@@ -17,27 +16,6 @@ const Addmonth = () => {
     dispatch(addPays(input))
     setInput("");
   }
-
-  //const handleAddMonthClick = (e) => {
-    // e.preventDefault();
-  //   if (isMonthInputFilled()) {
-  //     setPayMonths((prevState) => [month, ...prevState]);
-  //     setMonth("");
-
-  //     setPersons(
-  //       Object.assign([], persons).map(person => {
-  //         if (person.isActive === "✓") {
-  //           person.pays = [person.price, ...person.pays]
-  //         }
-  //         else {
-  //           person.pays = ["", ...person.pays]
-  //         }
-  //         return (person);
-  //       })
-  //     )
-  //   }
-  // };
-
     return (
         <div className="Add-month">
           <form> 

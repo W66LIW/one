@@ -2,8 +2,6 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { editPay } from "../reducers/personSlice";
 
-//import '../App.css';
-
 
 function TablePerson({person}) {
     const dispatch = useDispatch()

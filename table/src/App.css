@@ -9,13 +9,6 @@
   color: white;
   box-sizing: border-box;
   background-color: #5d6578;
-
-
-  /* 
-  min-height: 30vh;
-  min-width: 30vh; 
-  font-size: calc(10px + 1vmin); 
-  */
 }
 
 .Table td, th {
@@ -40,11 +33,6 @@
   padding: 0px;  
 }
 
-
-/* .App-header {
-  display: flex;
-  justify-content: left;
-} */
 
 .table-header {
   width: 50%;
@@ -137,16 +125,4 @@
   
 }
 
-
-/* .spin {
-  animation-name: rotation;
-  animation-duration: 10s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-} */
-
-@keyframes rotation { 
-  0% {transform:rotate(0deg);}
-  100% {transform:rotate(360deg);}
-  }
 

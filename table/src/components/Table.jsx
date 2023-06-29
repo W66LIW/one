@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 function Table() {
     const personss = useSelector(state => state.persons.persons)
     const months = useSelector(state => state.month.months)
-    //console.log(personss)
     
     return(
         <table className="Table">

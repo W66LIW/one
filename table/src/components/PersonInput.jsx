@@ -9,7 +9,6 @@ export default function PersonInput () {
     const dispatch = useDispatch();
     const personInput = useSelector(state => state.personInput.input);
     const months = useSelector(state => state.month.months);
-    //console.log(months)
 
     function handleSubmitPerson(e) {
         e.preventDefault();
@@ -31,30 +30,6 @@ export default function PersonInput () {
                 <Input element={'name'}/>
                 <Input element={'contract'}/>
                 <Input element={'price'}/>
-                {/* <td><div>
-                  <form>
-                    <input className='input' type="text" placeholder=" ..." onChange={(e) => dispatch(change({name: e.target.value}))}
-                      value={personInput.name} 
-                     />
-                  </form>
-                  </div>
-                </td>
-                 <td><div>
-                  <form>
-                    <input className='input' type="text" placeholder=' ...' onChange={(e) => dispatch(change({contract: e.target.value}))}                  
-                       value={personInput.contract} 
-                    />
-                  </form></div>
-                </td>
-                <td>
-                  <div>
-                  <form>
-                    <input className='input' placeholder=' ...' onChange={(e) => dispatch(change({price: +e.target.value}))}
-                       value={personInput.price} 
-                    />
-                  </form>
-                  </div>
-                  </td>  */}
                 <td><div><form onSubmit={handleSubmitPerson}><button className='btn' type='submit'>save</button></form></div></td>
               </tr>
             </tbody>
