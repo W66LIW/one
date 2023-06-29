@@ -3,7 +3,7 @@ import '../App.css';
 import { useDispatch, useSelector } from "react-redux";
 import { change, clear } from "../reducers/inputSlice";
 import { addPerson } from "../reducers/personSlice";
-import { Input } from "./inputs";
+import  Input  from "./inputs";
 
 export default function PersonInput () {
     const dispatch = useDispatch();

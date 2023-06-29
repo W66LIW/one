@@ -171,6 +171,8 @@ function App() {
       
 
       <div tabIndex={0} onKeyDown={handleKeyDown}>
+        <PersonInput/>
+        <Table/>
         
         {/* <div className="Add-month">
           <form> 
@@ -179,10 +181,6 @@ function App() {
           </form>
           <button className='btn' onClick={handleAddMonthClick}>add month</button>
         </div> */}
-
-        <PersonInput/>
-        <Table/>
-
 
         <div className="App-header">
           {/* <table className="table-header">
