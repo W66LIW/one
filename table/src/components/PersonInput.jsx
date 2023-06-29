@@ -19,8 +19,15 @@ export default function PersonInput () {
         dispatch(clear())        
     }
 
+    const handleKeyDown = (e) => {
+      if (e.key === "Enter") {
+        handleSubmitPerson(e);
+        // handleSubmitPay(e);
+      }
+    }
+
     return(
-        <div className="App-header">
+        <div className="App-header" tabIndex={0} onKeyDown={handleKeyDown}>
           <table className="table-header">
             <thead>
             <tr><th>Арендодатель</th><th>Договор</th><th>Арендная плата</th><th></th></tr>

@@ -16,10 +16,6 @@ const personSlice = createSlice({
                 }
             });    
 
-            // console.log("pays: " + JSON.stringify(pays))
-            
-            // console.log('action.payload.months'+action.payload.months)
-            // console.log('action.payload.personData: '+JSON.stringify(action.payload.personData) )
             state.persons.push({...action.payload.personData, pays: pays})
         },
         addPays(state, action){
@@ -31,6 +27,18 @@ const personSlice = createSlice({
                     amount: person.price
                 })
             })
+        },
+        changeActive(state, action){
+            state.persons.map(person => {
+                if(person.id === action.payload.id){
+                    if(person.isActive === '✓'){
+                        person.isActive = '✕';
+                    } else{
+                        person.isActive = '✓';
+                    } 
+                }
+            })
+
         },
         editPay(state, action){
             state.persons.map(person => {
@@ -49,5 +57,5 @@ const personSlice = createSlice({
     }
 });
 
-export const {addPerson, addPays, editPay} = personSlice.actions;
+export const {addPerson, addPays, editPay, changeActive} = personSlice.actions;
 export default personSlice.reducer;

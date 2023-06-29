@@ -26,7 +26,16 @@ function Table() {
                     return(
                         <TablePerson key={person.id} person = {person}/>
                     )
-                })}
+                })
+                }
+                {personss.filter((person) => person.isActive === '✕')
+                .sort((a, b) => (a.name > b.name ? 1 : -1))
+                .map(person => {
+                    return(
+                        <TablePerson key={person.id} person = {person}/>
+                    )
+                })
+                }
             </tbody>
         </table>
     )

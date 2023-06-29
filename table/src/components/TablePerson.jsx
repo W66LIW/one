@@ -1,17 +1,22 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { editPay } from "../reducers/personSlice";
+import { editPay, changeActive } from "../reducers/personSlice";
 
 
 function TablePerson({person}) {
     const dispatch = useDispatch()
+
     function toggleEdit(payID) {   
         console.log('onDoubleClick')    
         dispatch(editPay({id: person.id, payId: payID}))
     }
+
+    function change(){
+            dispatch(changeActive({id: person.id}))
+    }
     return(
         <tr>
-            <td>{person.isActive}</td>
+            <td onDoubleClick={() => change()}>{person.isActive}</td>
             <td>{person.name}</td>
             <td>{person.contract}</td>
             <td>{person.price}</td>
