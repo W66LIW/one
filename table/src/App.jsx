@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import './App.css';
-import Addmonth from './components/Addmonth';
 import { useDispatch, useSelector } from 'react-redux';
-//import { setCount } from './reducers/reposReducer';
-import { SET_COUNT } from './reducers/reposReducer';
+import './App.css';
+import Table from './components/Table';
+import Addmonth from './components/Addmonth';
+import PersonInput from './components/PersonInput';
+import { addPerson } from './reducers/personSlice';
 
 
 const personInput = {
@@ -30,14 +31,6 @@ const payEdit = {
 
 function App() {
   const dispatch = useDispatch();
-  const count = useSelector(state => state.repos.count)
-
-  function onCountClick () {
-    dispatch(SET_COUNT())
-  }
-
-  
-
   const [personData, setPersonData] = useState(personInput);
   const [persons, setPersons] = useState([]);
   const [editablePersonData, setEditablePersonData] = useState(edit);
@@ -61,6 +54,7 @@ function App() {
         setEditablePersonData(edit);
       } else {
         setPersons((prevState) => [personData, ...prevState])
+        dispatch(addPerson({...personData, id: new Date().toString()}))
       };
       setPersonData(personInput);
     }
@@ -81,7 +75,7 @@ function App() {
     })
     setPersonData(data);
 
-    console.log(`Edit`, data);
+    //console.log(`Edit`, data);
   }
 
 
@@ -162,28 +156,36 @@ function App() {
   }
 
 
-   console.log("persons", persons);
+   //console.log("persons", persons);
    //console.log("editablePay", editablePay);
 
 
 
   return (
     <div>
-      <button onClick={() => onCountClick()}>COUNT</button>
-      <div>{count}</div>
+      {/* <button onClick={() => onCountClick()}>COUNT</button>
+      <div>{count}</div> */}
+      {/* <Num/>
+      <Button/> */}
+      <Addmonth value = {1}/>
+      
+
       <div tabIndex={0} onKeyDown={handleKeyDown}>
-        <Addmonth value = {1}/>
-        <div className="Add-month">
+        
+        {/* <div className="Add-month">
           <form> 
             <input className='input' type="text" placeholder=" ..." onChange={(e) => setMonth(e.target.value)}
               value={month} />
           </form>
           <button className='btn' onClick={handleAddMonthClick}>add month</button>
-        </div>
+        </div> */}
+
+        <PersonInput/>
+        <Table/>
 
 
         <div className="App-header">
-          <table className="table-header">
+          {/* <table className="table-header">
             <thead>
             <tr><th>Арендодатель</th><th>Договор</th><th>Арендная плата</th><th></th><th></th></tr>
             </thead>
@@ -223,12 +225,12 @@ function App() {
                 <td><div><form onClick={handleRemoveClick}><button className='btn'>remove</button></form></div></td>
               </tr>
             </tbody>
-          </table>
+          </table> */}
         </div>
       </div>
 
 
-      <div>
+      {/* <div>
         <table className="Table">
           <thead><tr><th></th><th>ФИО</th><th>ДОГОВОР</th><th>АРЕНДНАЯ ПЛАТА</th>
             {payMonths.map((mnth) => {
@@ -276,7 +278,7 @@ function App() {
 
           </tbody>
         </table>
-      </div>
+      </div> */}
 
     </div>
   );
