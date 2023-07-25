@@ -15,7 +15,6 @@ const monthSlice = createSlice({
             state.months.push({
                 id: Date.now(),
                 name: action.payload})
-            //console.log('action.payload' + action.payload)
         }
     }
 })

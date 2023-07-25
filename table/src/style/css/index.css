@@ -1,0 +1,219 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  color: rgb(235, 229, 224);
+}
+
+body {
+  background-color: rgb(45, 45, 50);
+}
+
+.App {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.Add-month {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  margin: 5px 0px 30px 0px;
+  border: solid grey 1px;
+}
+.Add-month input {
+  display: block;
+  background-color: rgb(235, 229, 224);
+  border: none;
+  color: #000;
+  font-size: 13px;
+  background-color: rgb(235, 229, 224);
+  width: 100px;
+  height: 100%;
+}
+.Add-month select {
+  display: block;
+  background-color: rgb(235, 229, 224);
+  border: none;
+  color: #000;
+  font-size: 13px;
+  background-color: rgb(235, 229, 224);
+  width: 100px;
+}
+.Add-month select option {
+  color: #000;
+}
+.Add-month button {
+  border: none;
+  cursor: pointer;
+  background-color: rgb(20, 22, 46);
+  font-size: 12px;
+  width: 80px;
+  padding: 3px;
+}
+.Add-month button:hover {
+  background-color: rgb(35, 38, 74);
+}
+
+.App-header {
+  margin: 5px 10px;
+}
+.App-header table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+.App-header th, .App-header td {
+  border: solid grey 1px;
+  background-color: rgb(20, 22, 46);
+  letter-spacing: 0.5px;
+}
+.App-header th {
+  height: 24px;
+  padding: 1px;
+}
+.App-header input {
+  display: block;
+  background-color: rgb(235, 229, 224);
+  border: none;
+  color: #000;
+  font-size: 13px;
+  height: 17px;
+  width: 160px;
+  padding: 2px;
+}
+.App-header button {
+  border: none;
+  cursor: pointer;
+  background-color: rgb(20, 22, 46);
+  font-size: 12px;
+  text-align: center;
+  height: 20px;
+  padding: 0px 4px;
+}
+.App-header button:hover {
+  background-color: rgb(35, 38, 74);
+}
+
+.Table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+.Table th:nth-of-type(1) {
+  min-width: 15px;
+}
+.Table th:nth-of-type(2) {
+  min-width: 15px;
+}
+.Table th:nth-of-type(3) {
+  min-width: 150px;
+}
+.Table th:nth-of-type(4) {
+  min-width: 100px;
+}
+.Table th:nth-of-type(5) {
+  min-width: 30px;
+}
+.Table td:nth-of-type(1) {
+  padding: 3px 2px 0px 5px;
+}
+.Table td:nth-of-type(2) {
+  text-align: center;
+}
+.Table img {
+  width: 15px;
+  margin: 0px;
+  cursor: pointer;
+}
+.Table th, .Table td {
+  border: solid grey 1px;
+  font-size: 15px;
+}
+.Table th {
+  background-color: rgb(20, 22, 46);
+  padding: 5px;
+}
+.Table td {
+  background-color: rgb(235, 229, 224);
+  color: #000;
+  padding: 1px 5px;
+  height: 19px;
+}
+.Table tfoot td {
+  background-color: rgb(63, 64, 80);
+  color: #ffffff;
+}
+
+.OF {
+  max-width: 90%;
+  overflow-x: scroll;
+  padding: 0px;
+  margin: 0px;
+}
+
+.Pay {
+  border-collapse: collapse;
+  border-spacing: 0px;
+  table-layout: fixed;
+  max-width: 100%;
+}
+.Pay th, .Pay td {
+  border: solid grey 1px;
+  min-width: 75px;
+  font-size: 15px;
+}
+.Pay th {
+  background-color: rgb(20, 22, 46);
+  padding: 5px;
+}
+.Pay td {
+  background-color: rgb(235, 229, 224);
+  color: #000;
+  text-align: end;
+  padding: 1px 5px;
+  height: 20px;
+  font-size: 16px;
+}
+.Pay tfoot td {
+  background-color: rgb(63, 64, 80);
+  color: #ffffff;
+}
+.Pay tbody tr:hover td {
+  background-color: rgb(205, 200, 196);
+}
+.Pay input {
+  display: block;
+  background-color: rgb(235, 229, 224);
+  border: none;
+  color: #000;
+  font-size: 13px;
+  background-color: rgb(216, 216, 216);
+  width: 40px;
+  font-size: 13px;
+}
+
+.Data {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  margin: 30px 0px;
+  width: 100%;
+}

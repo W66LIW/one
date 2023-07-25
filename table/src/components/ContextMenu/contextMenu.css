@@ -1,0 +1,29 @@
+
+.contextMenu {
+    display: none;
+    text-align: start;
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    list-style: none;
+    border: darkslategray solid 1px ;
+    background-color: rgb(204, 204, 204);
+    font-size: 13px;
+    
+}
+
+.contextMenu.active{
+    display: block;
+}
+
+.contextMenu li {
+    margin: 0px;
+    padding: 3px;
+    margin: 0px;
+    cursor: pointer;
+}
+
+
+.contextMenu li:hover {
+    background-color: rgb(161, 161, 161);
+}

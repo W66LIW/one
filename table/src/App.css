@@ -1,32 +1,37 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
 
-
+img{
+  width: 15px;
+  margin: 0px;
+}
 .Table { 
   border-collapse: collapse;
   width: 70%;
   margin: 30px 10px;
   color: white;
   box-sizing: border-box;
-  background-color: #5d6578;
+  /* background-color: #020a1f; */
 }
 
 .Table td, th {
+  text-align: center;
+  padding: 5px;
   margin: 0;
-  border: 1.5px solid #39435a;
+  border: 1.5px solid rgb(117, 118, 128);
 }
 
 .Table th {
   padding: 4px;
   height: 20px;
   text-align: center;
-  background-color: #4e535e;
+  background-color: #172748;
   font-size: 14px;
   font-family: 'Raleway', sans-serif;
 }
 
 .Table td {
-  background-color: rgb(225, 224, 224); 
+  background-color: #757680; 
   color:black;  
   width: fit-content;
   height: 15px; 
@@ -52,14 +57,14 @@
 
 .table-header th, td {
   margin: 0;
-  border: 1.5px solid #39435a;
+  border: 1.5px solid #3f465b;
 }
 
 .table-header th {
   padding: 4px;
   height: 20px;
   text-align: center;
-  background-color: #4e535e;
+  background-color: #232f47;
   font-size: 14px;
   font-family: 'Raleway', sans-serif
 }
@@ -72,9 +77,8 @@
 
 .table-header input {
   display: flex;
-  background-color: rgb(225, 224, 224);  
+  background-color: #757680;  
   height: 100%;
-  width: 100%;
   min-width: 30px;
   padding: 2px;
   border: none; 
@@ -84,7 +88,7 @@
 .table-header button {
   display: flex;
   padding: 4px;
-  background-color: #4e535e;
+  background-color: #232f47;
   border: none;
   color: #ffffff;
   height: 100%;
@@ -95,7 +99,7 @@
 
 .Add-month {
   box-sizing: border-box;
-  border: 1.5px solid #39435a;
+  border: 1.5px solid #505c76;
   margin-left: auto;
   display: flex;  
   justify-content: flex-end;
@@ -115,7 +119,7 @@
 
 .Add-month input {
   display: flex;
-  background-color: rgb(225, 224, 224);  
+  background-color: #757680;  
   height: 100%;
   width: 100%;
   min-width: 30px;
@@ -123,6 +127,11 @@
   border: none;
   box-sizing: border-box;
   
+}
+
+.App{
+  height: 100vh;
+  width: 100%;
 }
 
 
